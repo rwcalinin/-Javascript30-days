@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
       audio.currentTime = 0;
       audio.play();
       key.classList.add('playing');
-      key.classList.add('remove');
    }
 
    function removeTransition(e) {
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
    const keys = document.querySelectorAll('.key');
    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-   
+
    window.addEventListener('keydown', playSound);
 
 });
