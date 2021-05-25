@@ -1,22 +1,21 @@
-'use strict';
+const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+let   lastCheck;
 
-window.addEventListener('DOMContentLoaded', () => {
-
-    const inbox = document.querySelector('.inbox'),
-          item = inbox.querySelectorAll('.item'),
-          checkbox = inbox.querySelectorAll('input');
-
-    checkbox.forEach((item) => {
-        item.addEventListener('click', (e) => {
-            e.target.classList.toggle('--checked');
-            let checkboxArr = [...checkbox];
-            checkChecked(checkboxArr);
+function checkChecked(e) {
+    let inBetween = false;
+    if (e.shiftKey && this.checked) {
+        checkboxes.forEach(checkbox => {
+            if (checkbox === this || checkbox === lastCheck) {
+                inBetween = !inBetween;
+            }
+            if (inBetween) {
+                checkbox.checked = true;
+            }
         });
-    });
-
-    function checkChecked(cbArr) {
-        console.log(cbArr);
-        
     }
+    lastCheck = this;
+}
 
-});
+checkboxes.forEach((cBox) => {
+    cBox.addEventListener('click', checkChecked);
+})
